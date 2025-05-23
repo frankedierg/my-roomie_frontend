@@ -1,0 +1,35 @@
+.home-container {
+  text-align: center;
+  margin-top: 4rem;
+
+  h1 {
+    font-size: 2.5rem;
+    color: #4a148c;
+
+    .highlight {
+      font-weight: bold;
+    }
+  }
+
+  .button-group {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+
+    button {
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      background-color: #4a148c;
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #6a1b9a;
+      }
+    }
+  }
+}

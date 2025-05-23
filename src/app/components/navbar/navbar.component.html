@@ -1,0 +1,31 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">My Roomie</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register">Registrar</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/users">Usuarios</a>
+        </li>
+      </ul>
+
+      <div *ngIf="estaLogueado()" class="d-flex align-items-center gap-3">
+        <span class="text-white fw-bold">Hola, {{ getNombreUsuario() }}</span>
+        <button class="btn btn-secondary" (click)="cerrarSesion()">Cerrar sesión</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+

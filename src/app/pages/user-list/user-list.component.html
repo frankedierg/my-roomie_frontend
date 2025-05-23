@@ -1,0 +1,30 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-5">
+  <h2 class="mb-4 text-center text-primary">Usuarios registrados</h2>
+
+  <div class="row g-4">
+    <div class="col-md-6 col-lg-4" *ngFor="let user of users">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">{{ user.name }}</h5>
+          <p class="card-text">
+            <strong>Correo:</strong> {{ user.email }}<br />
+            <strong>Universidad:</strong> {{ user.university }}<br />
+            <strong>Preferencias:</strong> {{ user.preferences || 'N/A' }}
+          </p>
+        </div>
+        <div class="card-footer text-end">
+          <button class="btn btn-secondary" (click)="confirmarEliminacion(user._id)">
+  Eliminar
+</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p *ngIf="users.length === 0" class="text-center text-muted mt-4">
+    No hay usuarios registrados aún.
+  </p>
+</div>
