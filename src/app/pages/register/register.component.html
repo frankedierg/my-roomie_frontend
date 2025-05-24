@@ -1,43 +1,58 @@
 <app-navbar></app-navbar>
 
-<div class="container mt-5">
+<div class="container py-5">
   <div class="row justify-content-center">
-    <div class="col-md-6">
-      <h2 class="mb-4 text-center">Registro de usuario</h2>
+    <div class="col-md-10 col-lg-8">
+      <div class="card shadow-3">
+        <div class="row g-0">
+          <!-- Imagen lateral -->
+          <div class="col-md-6 d-none d-md-block">
+            <img
+              src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp"
+              alt="form"
+              class="img-fluid rounded-start h-100 w-100 object-fit-cover"
+            />
+          </div>
 
-      <form (ngSubmit)="registerUser()">
-        <div class="mb-3">
-          <label for="name" class="form-label">Nombre:</label>
-          <input type="text" id="name" [(ngModel)]="user.name" name="name" class="form-control" required />
+          <!-- Formulario -->
+          <div class="col-md-6 p-4">
+            <h4 class="text-center fw-bold mb-4">Formulario de Registro</h4>
+
+            <form (ngSubmit)="registerUser()">
+              <div class="form-outline mb-3">
+                <input type="text" [(ngModel)]="user.name" name="name" id="name" class="form-control" required />
+                <label for="name" class="form-label">Nombre</label>
+              </div>
+
+              <div class="form-outline mb-3">
+                <input type="email" [(ngModel)]="user.email" name="email" id="email" class="form-control" required />
+                <label for="email" class="form-label">Correo</label>
+              </div>
+
+              <div class="form-outline mb-3">
+                <input type="text" [(ngModel)]="user.university" name="university" id="university" class="form-control" />
+                <label for="university" class="form-label">Universidad</label>
+              </div>
+
+              <div class="form-outline mb-3">
+                <textarea [(ngModel)]="user.preferences" name="preferences" id="preferences" class="form-control"></textarea>
+                <label for="preferences" class="form-label">Preferencias</label>
+              </div>
+
+              <div class="form-outline mb-4">
+                <input type="password" [(ngModel)]="user.password" name="password" id="password" class="form-control" required />
+                <label for="password" class="form-label">Contraseña</label>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+            </form>
+
+            <div *ngIf="message" class="alert alert-info mt-3 text-center">
+              {{ message }}
+            </div>
+          </div>
         </div>
-
-        <div class="mb-3">
-          <label for="email" class="form-label">Correo:</label>
-          <input type="email" id="email" [(ngModel)]="user.email" name="email" class="form-control" required />
-        </div>
-
-        <div class="mb-3">
-          <label for="university" class="form-label">Universidad:</label>
-          <input type="text" id="university" [(ngModel)]="user.university" name="university" class="form-control" required />
-        </div>
-
-        <div class="mb-3">
-          <label for="preferences" class="form-label">Preferencias:</label>
-          <textarea id="preferences" [(ngModel)]="user.preferences" name="preferences" class="form-control"></textarea>
-        </div>
-
-        <div class="mb-3">
-          <label for="password" class="form-label">Contraseña:</label>
-          <input type="password" id="password" [(ngModel)]="user.password" name="password" class="form-control" required />
-        </div>
-
-        <button type="submit" class="btn btn-primary w-100">Registrarse</button>
-      </form>
-
-      <div *ngIf="message" class="alert alert-info mt-4 text-center">
-        {{ message }}
       </div>
     </div>
   </div>
 </div>
-
