@@ -1,0 +1,188 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-4">
+  <div class="card p-4 shadow-sm">
+    <h3 class="text-center mb-4 text-primary fw-bold">Publicar habitación</h3>
+
+    <form #form="ngForm" (ngSubmit)="guardarHabitacion(form)" novalidate>
+
+
+      <!-- Título -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Título</label>
+        <input
+          type="text"
+          class="form-control"
+          id="title"
+          name="title"
+          [(ngModel)]="room.title"
+          required
+          #title="ngModel"
+          [class.is-invalid]="title.invalid && title.touched"
+        />
+        <div class="invalid-feedback">
+          El título es obligatorio.
+        </div>
+      </div>
+
+      <!-- Descripción -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Descripción</label>
+        <textarea
+          class="form-control"
+          id="description"
+          rows="3"
+          name="description"
+          [(ngModel)]="room.description"
+        ></textarea>
+      </div>
+
+     
+      <!-- Departamento -->
+<div class="mb-3">
+  <label for="departamento" class="form-label">Departamento</label>
+  <select
+    class="form-select"
+    id="departamento"
+    name="departamento"
+    [(ngModel)]="room.departamento"
+    (change)="actualizarCiudades(room.departamento)"
+    required
+  >
+    <option value="" disabled selected>Selecciona un departamento</option>
+    <option *ngFor="let depto of departamentos" [value]="depto.nombre">{{ depto.nombre }}</option>
+  </select>
+</div>
+
+<!-- Ciudad -->
+<div class="mb-3">
+  <label for="ciudad" class="form-label">Ciudad</label>
+  <select
+    class="form-select"
+    id="ciudad"
+    name="ciudad"
+    [(ngModel)]="room.ciudad"
+    required
+  >
+    <option value="" disabled selected>Selecciona una ciudad</option>
+    <option *ngFor="let ciudad of ciudades" [value]="ciudad">{{ ciudad }}</option>
+  </select>
+</div>
+ <!-- Ubicación -->
+      <div class="mb-3">
+        <label for="location" class="form-label">Ubicación</label>
+        <input
+          type="text"
+          class="form-control"
+          id="location"
+          name="location"
+          placeholder="Localidad, barrio"
+          [(ngModel)]="room.location"
+          required
+          #location="ngModel"
+          [class.is-invalid]="location.invalid && location.touched"
+        />
+        <div class="invalid-feedback">
+          La ubicación es obligatoria.
+        </div>
+      </div>
+
+
+      <!-- Precio -->
+      <div class="mb-3">
+        <label for="price" class="form-label">Precio mensual (COP)</label>
+        <input
+          type="number"
+          class="form-control"
+          id="price"
+          name="price"
+          [(ngModel)]="room.price"
+          required
+          min="10000"
+          #price="ngModel"
+          [class.is-invalid]="price.invalid && price.touched"
+        />
+        <div class="invalid-feedback">
+          Ingrese un precio válido (mínimo $10.000).
+        </div>
+      </div>
+
+      <!-- Servicios incluidos -->
+      <div class="form-check mb-3">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="billsIncluded"
+          [(ngModel)]="room.billsIncluded"
+          name="billsIncluded"
+        />
+        <label class="form-check-label" for="billsIncluded">
+          Servicios incluidos
+        </label>
+      </div>
+
+      <!-- Tipo de propiedad -->
+      <div class="mb-3">
+        <label class="form-label">Tipo de propiedad</label>
+        <div class="d-flex flex-wrap gap-3">
+          <div *ngFor="let tipo of propertyTypes" class="form-check form-check-inline">
+            <input
+              class="form-check-input"
+              type="radio"
+              [id]="tipo"
+              name="propertyType"
+              [value]="tipo"
+              [(ngModel)]="room.propertyType"
+              required
+            />
+            <label class="form-check-label" [for]="tipo">{{ tipo }}</label>
+          </div>
+        </div>
+        <div class="text-danger mt-1" *ngIf="!room.propertyType && form.submitted">
+          Selecciona un tipo de propiedad.
+        </div>
+      </div>
+
+      <!-- Fecha disponible -->
+      <div class="mb-3">
+        <label for="availableFrom" class="form-label">Disponible desde</label>
+        <input
+          type="date"
+          class="form-control"
+          id="availableFrom"
+          name="availableFrom"
+          [(ngModel)]="room.availableFrom"
+          required
+          [min]="minDate"
+          #availableFrom="ngModel"
+          [class.is-invalid]="availableFrom.invalid && availableFrom.touched"
+        />
+        <div class="invalid-feedback">
+          La fecha debe ser hoy o posterior.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Subir imagen</label>
+        <input type="file" id="image" class="form-control" (change)="onFileSelected($event)" accept="image/*">
+      </div>
+
+      <!-- Vista previa opcional -->
+      <div *ngIf="room.imageUrl" class="mb-3 text-center">
+        <img [src]="room.imageUrl" alt="Vista previa" class="img-fluid rounded shadow" style="max-height: 200px;">
+      </div>
+
+
+
+      <!-- Botón -->
+      <button type="submit" class="btn btn-primary w-100" [disabled]="form.invalid">
+        {{ roomId ? 'Actualizar' : 'Guardar habitación' }}
+      </button>
+
+      <!-- Mensaje -->
+      <div *ngIf="message" class="alert alert-info mt-3 text-center">
+        {{ message }}
+      </div>
+    </form>
+  </div>
+</div>

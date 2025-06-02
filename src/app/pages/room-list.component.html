@@ -1,0 +1,48 @@
+<app-navbar></app-navbar>
+
+<div class="container mt-4">
+  <h2 class="text-center mb-4 text-primary fw-bold">Habitaciones publicadas</h2>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let room of rooms">
+      <div class="card h-100 shadow-sm">
+        <img src="/img/room.jpg" class="card-img-top" alt="Habitación">
+
+        <div class="card-body">
+          <h5 class="card-title">{{ room.title }}</h5>
+
+          <p class="card-text mb-1">
+            <i class="bi bi-geo-alt-fill me-2 text-secondary"></i>
+            <strong>Ubicación:</strong> {{ room.location }}
+          </p>
+          <p class="card-text mb-1">
+            <i class="bi bi-currency-dollar me-2 text-secondary"></i>
+            <strong>Precio:</strong> {{ room.price | currency:'COP':'symbol':'1.0-0' }}
+          </p>
+          <p class="card-text mb-1">
+            <i class="bi bi-house-door me-2 text-secondary"></i>
+            <strong>Tipo:</strong> {{ room.propertyType || 'No especificado' }}
+          </p>
+          <p class="card-text mb-1">
+            <i class="bi bi-calendar-check me-2 text-secondary"></i>
+            <strong>Disponible desde:</strong> {{ room.availableFrom | date }}
+          </p>
+
+          <div *ngIf="room.billsIncluded" class="mt-2">
+            <span class="badge bg-success"><i class="bi bi-lightning-charge me-1"></i> Servicios incluidos</span>
+          </div>
+
+          <p class="card-text mt-2">{{ room.description }}</p>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <a [routerLink]="['/rooms/edit', room._id]" class="btn btn-primary btn-sm">
+            Editar
+          </a>
+          <button class="btn btn-danger btn-sm" (click)="eliminarHabitacion(room._id)">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

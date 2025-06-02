@@ -9,16 +9,23 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/register">Registrar</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/users">Usuarios</a>
-        </li>
-      </ul>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/register">Registrar</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/login">Login</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" routerLink="/users">Usuarios</a>
+  </li>
+  <li class="nav-item" *ngIf="estaLogueado()">
+    <a class="nav-link" routerLink="/rooms">Habitaciones</a>
+  </li>
+  <li class="nav-item" *ngIf="estaLogueado()">
+    <a class="nav-link" routerLink="/rooms/new">Publicar</a>
+  </li>
+</ul>
+
 
       <div *ngIf="estaLogueado()" class="d-flex align-items-center gap-3">
         <span class="text-white fw-bold">Hola, {{ getNombreUsuario() }}</span>
